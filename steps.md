@@ -83,3 +83,44 @@ app.get('/api/contacts', (req,res) => {
     res.json({message:"Get All Contacts"});
 });
 ```
+
+we can also pass the status code :
+```js
+app.get('/api/contacts', (req,res) => {
+    res
+    .status(200)
+    .json({message:"Get All Contacts"});
+});
+```
+
+This was an example of just making an endpoint, but we are not going to have all our routs in server.js. 
+
+## handling routes
+We are going to handle routes by making a new folder `routes`. 
+
+Inside make a new file `contactRoutes.js`. 
+
+in `contactRoutes.js`: 
+
+add first the imports : 
+```js
+const express = require("express");
+const router = express.Router();
+```
+and in server.js wewill use app.use() to make a middleware where we will define thebase route and give access to the routerclass. 
+
+In app js remove the previous get method. 
+```js
+//app.js 
+
+app.use("/api/contacts", require("../routes/contactRoutes.js"));
+
+```
+
+in the contactRoutes.js file :
+```js
+router.route("/").get((req, res) =>{
+    res.status(200).json({message:"Get All Contacts"})
+});
+module.exports = router;
+```
