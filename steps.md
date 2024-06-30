@@ -21,7 +21,7 @@
 10. Now To confirm go to server.js and confirm the server is running go to `script.js` and add a console log and see the demon server updating automatically
 
 ## Creating Express Server
-1. In the server .js add the following commands
+1. In the `server.js` add the following commands
 ```js
 const express = require("express");
 // importing
@@ -117,10 +117,40 @@ app.use("/api/contacts", require("../routes/contactRoutes.js"));
 
 ```
 
-in the contactRoutes.js file :
+in the `contactRoutes.js` file :
 ```js
 router.route("/").get((req, res) =>{
     res.status(200).json({message:"Get All Contacts"})
 });
 module.exports = router;
+```
+
+Later add otherroutes and then check the response aswell :
+Updated `contactRoutes.js` is follows : 
+```javascript
+const express = require("express");
+const router = express.Router();
+
+router.route("/").get((req, res) =>{
+    res.status(200).json({message:"Get All Contacts"})
+});
+
+router.route("/").post((req, res) =>{
+    res.status(200).json({message:"Create Contact"})
+});
+
+router.route("/:id").get((req, res) =>{
+    res.status(200).json({message:`Get Contact for ${req.params.id}`})
+});
+
+router.route("/:id").put((req, res) =>{
+    res.status(200).json({message:`Update contact for ${req.params.id}`})
+});
+
+router.route("/:id").delete((req, res) =>{
+    res.status(200).json({message:`Delete Contact for ${req.params.id}`})
+});
+
+module.exports = router;
+
 ```
